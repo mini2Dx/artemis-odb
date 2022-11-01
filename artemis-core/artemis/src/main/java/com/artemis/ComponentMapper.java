@@ -149,4 +149,10 @@ public class ComponentMapper<A extends Component> extends BaseComponentMapper<A>
                 : ComponentManager.newInstance(type.getType()));
     }
 
+    public int poolSize() {
+        if(pool == null) {
+            return 0;
+        }
+        return pool.cacheSize();
+    }
 }

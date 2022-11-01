@@ -4,11 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import com.artemis.annotations.Wire;
+import com.artemis.component.PoolSizeString;
 import com.artemis.component.PooledString;
+import com.artemis.systems.EntityProcessingSystem;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ComponentPoolTest
 {
+	public static final int POOL_SIZE = 17;
+
 	@SuppressWarnings("static-method")
 	@Test
 	public void reuse_pooled_components() {
@@ -45,10 +51,31 @@ public class ComponentPoolTest
 		assertTrue(ps == ps2);
 		assertNull(ps.s);
 	}
+
+	@Test
+	public void test_pool_size() {
+		final PoolSizeSystem poolSizeSystem = new PoolSizeSystem();
+		final World world = new World(new WorldConfiguration().setSystem(poolSizeSystem));
+		Assert.assertEquals(POOL_SIZE, poolSizeSystem.componentMapper.poolSize());
+	}
 	
 	public static final class SimplePooled extends PooledComponent {
 		
 		@Override
 		public void reset() {}
+	}
+
+	@Wire
+	public class PoolSizeSystem extends EntityProcessingSystem {
+
+		public PoolSizeSystem() {
+			super(Aspect.all(PoolSizeString.class));
+		}
+
+		protected ComponentMapper<PoolSizeString> componentMapper;
+
+		@Override
+		protected void process(Entity e) {
+		}
 	}
 }
