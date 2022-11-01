@@ -132,10 +132,32 @@ public final class Field {
 		}
 	}
 
+	/** Returns the int value of the field on the supplied object. */
+	public int getInt(Object obj) throws ReflectionException {
+		try {
+			return field.getInt(obj);
+		} catch (IllegalArgumentException e) {
+			throw new ReflectionException("Object is not an instance of " + getDeclaringClass(), e);
+		} catch (IllegalAccessException e) {
+			throw new ReflectionException("Illegal access to field: " + getName(), e);
+		}
+	}
+
 	/** Sets the value of the field on the supplied object. */
 	public void set (Object obj, Object value) throws ReflectionException {
 		try {
 			field.set(obj, value);
+		} catch (IllegalArgumentException e) {
+			throw new ReflectionException("Argument not valid for field: " + getName(), e);
+		} catch (IllegalAccessException e) {
+			throw new ReflectionException("Illegal access to field: " + getName(), e);
+		}
+	}
+
+	/** Sets the int value of the field on the supplied object. */
+	public void setInt(Object obj, int value) throws ReflectionException {
+		try {
+			field.setInt(obj, value);
 		} catch (IllegalArgumentException e) {
 			throw new ReflectionException("Argument not valid for field: " + getName(), e);
 		} catch (IllegalAccessException e) {
