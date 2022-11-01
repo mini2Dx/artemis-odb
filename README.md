@@ -1,5 +1,7 @@
 ## Artemis-odb
 
+_Forked version of junkdog/artemis-odb with bug fixes and performance improvements_
+
 [![Build status](https://github.com/junkdog/artemis-odb/actions/workflows/javaCI.yml/badge.svg?label=Build)](https://github.com/junkdog/artemis-odb/actions/workflows/javaCI.yml)
 [![Discord Chat](https://img.shields.io/discord/348229412858101762?logo=discord)](https://libgdx.com/community/discord/)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
@@ -77,7 +79,7 @@ Share your thoughts and questions with us!
 
 ```xml
 <dependency>
-	<groupId>net.onedaybeard.artemis</groupId>
+	<groupId>org.mini2Dx</groupId>
 	<artifactId>artemis-odb</artifactId>
 	<version>2.4.0</version>
 </dependency>
